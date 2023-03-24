@@ -55,7 +55,7 @@ const PaymentInfoPage = () => {
 
             <h5>Payment Info</h5>
             <Form noValidate validated={validated} onSubmit={handlePaymentInfoSubmit}>
-                <Form.Group controlId="cardName">
+                <Form.Group controlId="cardName" className="mb-3">
                     <Form.Label>Cardholder Name</Form.Label>
                     <Form.Control
                         required
@@ -72,7 +72,7 @@ const PaymentInfoPage = () => {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group controlId="cardNumber">
+                <Form.Group controlId="cardNumber" className="mb-3">
                     <Form.Label>Credit Card Number</Form.Label>
                     <Form.Control
                         required
