@@ -94,6 +94,7 @@ const PaymentInfoPage = () => {
                         type="text"
                         name="cardNumber"
                         placeholder="Enter credit card number"
+                        maxLength={16}
                         value={paymentInfo.cardNumber}
                         onChange={handleInputChange}
                         pattern="^4[0-9]{12}(?:[0-9]{3})?$|^5[1-5][0-9]{14}$|^3[47][0-9]{13}$"
