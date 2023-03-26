@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CartState } from "../../../context/Context";
+import { FaCcVisa, FaCcMastercard, FaCcAmex } from 'react-icons/fa';
+
 
 const PaymentInfoPage = () => {
     const [validated, setValidated] = useState(false);
 
     const [paymentSaved, setPaymentSaved] = useState(false);
+
+    const [cardBrand, setCardBrand] = useState(null);
 
     const [paymentInfo, setPaymentInfo] = useState({
         cardName: '',
@@ -27,6 +31,17 @@ const PaymentInfoPage = () => {
             ...paymentInfo,
             [name]: value
         });
+
+        if (/^4/.test(paymentInfo.cardNumber)) {
+            setCardBrand('visa');
+        } else if (/^5[1-5]/.test(paymentInfo.cardNumber)) {
+            setCardBrand('mastercard');
+        } else if (/^3[47]/.test(paymentInfo.cardNumber)) {
+            setCardBrand('amex');
+        } else {
+            setCardBrand(null);
+        }
+
 
 
     };
@@ -81,9 +96,13 @@ const PaymentInfoPage = () => {
                         placeholder="Enter credit card number"
                         value={paymentInfo.cardNumber}
                         onChange={handleInputChange}
-                        pattern="^([0-9]{4}[-]){3}[0-9]{4}$|^([0-9]{16})$"
+                        pattern="^4[0-9]{12}(?:[0-9]{3})?$|^5[1-5][0-9]{14}$|^3[47][0-9]{13}$"
 
                     />
+
+                    {paymentInfo.cardNumber && cardBrand === 'visa' && <FaCcVisa size={30} />}
+                    {paymentInfo.cardNumber && cardBrand === 'mastercard' && <FaCcMastercard size={30} />}
+                    {paymentInfo.cardNumber && cardBrand === 'amex' && <FaCcAmex size={30} />}
 
                     <Form.Control.Feedback type="invalid">
                         Please enter a valid credit card number.
