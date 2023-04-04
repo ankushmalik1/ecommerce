@@ -61,6 +61,7 @@
   padding: 20px;
   flex-wrap: wrap;
   justify-content: space-around;
+  
 }
 
 .products {
@@ -107,16 +108,16 @@ overflow: hidden;
   .filters {
     width: 40%;
     padding: 10px;
-    margin: 5px;
+    margin: 4px;
   }
 
   .filters > span {
-    font-size: 10px;
+    font-size: 12px;
   }
 
 
   .title {
-    font-size: 18px !important;
+    font-size: 19px !important;
   }
 
   .productContainer {

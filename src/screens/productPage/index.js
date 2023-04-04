@@ -1,40 +1,26 @@
-import React from 'react'
-import { CartState } from '../../context/Context'
-import SingleProduct from './SingleProduct';
-import "./style.css"
+import React from "react";
+import { CartState } from "../../context/Context";
+import SingleProduct from "./SingleProduct";
+import "./style.css";
 
 const Home = () => {
+  const {
+    state: { products },
+  } = CartState();
 
-    const { state: { products },
-        productState: { searchQuery } } = CartState();
+  const generatedProducts = () => {
+    let categorizedProducts = [...products];
 
+    return categorizedProducts;
+  };
 
+  return (
+    <div className="productContainer">
+      {generatedProducts().map((prod) => {
+        return <SingleProduct prod={prod} key={prod.id}></SingleProduct>;
+      })}
+    </div>
+  );
+};
 
-    const transformProducts = () => {
-        let sortedProducts = [...products];
-
-        if (searchQuery) {
-            sortedProducts = sortedProducts.filter((prod) =>
-                prod.title.toLowerCase().includes(searchQuery)
-            );
-        }
-
-        return sortedProducts;
-    }
-
-
-
-    return (
-
-        <div className="productContainer">
-            {
-                transformProducts().map((prod) => {
-                    return <SingleProduct prod={prod} key={prod.id}></SingleProduct>
-                })
-            }
-        </div>
-
-    )
-}
-
-export default Home
+export default Home;
